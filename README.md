@@ -3,7 +3,7 @@ A Kotlin multiplatform VecN implementation
 
 --------------------------
 
-Example:
+## Example
 
 ```kotlin
 class Vec2(x: Float, y: Float) : Vec<Vec2>(arrayOf(x, y)) {
@@ -25,3 +25,26 @@ fun main() {
     assertEquals(Vec2(0f, 0f).dist(Vec2(10f, 10f)), sqrt(200f))
 }
 ```
+
+## Install
+
+
+Step 1. Add it in your root build.gradle at the end of repositories:
+
+```gradle
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+Step 2. Add the dependency
+
+```gradle
+dependencies {
+        implementation 'com.github.dwillie:kvecn:-SNAPSHOT'
+}
+```
+
