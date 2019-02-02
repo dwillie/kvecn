@@ -7,9 +7,14 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class VecTests {
-    class Vec2(x: Float, y: Float) : Vec<Vec2>(arrayOf(x, y)) {
-        override fun create(values: Array<Float>) =
+    class Vec2(x: Float, y: Float) : Vec<Vec2>(floatArrayOf(x, y)) {
+        override fun create(values: FloatArray) =
             Vec2(values[0], values[1])
+
+        val x: Float
+            get() = values[0]
+        val y: Float
+            get() = values[1]
     }
 
     @Test
@@ -78,7 +83,7 @@ class VecTests {
     fun testCentroid() {
         assertEquals(
             Vec.centroid(
-                arrayOf(Vec2(0f, 0f), Vec2(10f, 10f))
+                listOf(Vec2(0f, 0f), Vec2(10f, 10f))
             )!!,
             Vec2(5f, 5f)
         )

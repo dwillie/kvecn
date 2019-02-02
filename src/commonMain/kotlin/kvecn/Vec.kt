@@ -2,14 +2,14 @@ package kvecn
 
 import kotlin.math.sqrt
 
-abstract class Vec<V : Vec<V>>(val values: Array<Float>) {
-    abstract fun create(values: Array<Float>): V
+abstract class Vec<V : Vec<V>>(val values: FloatArray) {
+    abstract fun create(values: FloatArray): V
 
     operator fun plus(other: V): V =
-        create(values.zip(other.values).map { z -> z.first + z.second }.toTypedArray())
+        create(values.zip(other.values).map { z -> z.first + z.second }.toFloatArray())
 
     operator fun minus(other: V): V =
-        create(values.zip(other.values).map { z -> z.first - z.second }.toTypedArray())
+        create(values.zip(other.values).map { z -> z.first - z.second }.toFloatArray())
 
     fun distSq(other: V): Float =
         values.zip(other.values)
@@ -36,14 +36,14 @@ abstract class Vec<V : Vec<V>>(val values: Array<Float>) {
     }
 
     companion object {
-        fun <V : Vec<V>> centroid(vecs: Array<V>): V? =
+        fun <V : Vec<V>> centroid(vecs: Collection<V>): V? =
             vecs.firstOrNull()?.let {
                 val sumValues = MutableList(it.values.size) { 0f }
-                vecs.forEach { vec ->
+                for (vec in vecs) {
                     vec.values.forEachIndexed { i, value -> sumValues[i] += value }
                 }
 
-                it.create(sumValues.map { value -> value / vecs.size }.toTypedArray())
+                it.create(sumValues.map { value -> value / vecs.size }.toFloatArray())
             }
     }
 
