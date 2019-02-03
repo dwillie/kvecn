@@ -1,5 +1,7 @@
 # kvecn
-A Kotlin multiplatform VecN implementation
+A Kotlin multiplatform VecN implementation 
+
+[![CircleCI](https://circleci.com/gh/dwillie/kvecn.svg?style=svg)](https://circleci.com/gh/dwillie/kvecn)
 
 --------------------------
 
