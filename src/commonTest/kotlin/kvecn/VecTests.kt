@@ -1,10 +1,8 @@
 package kvecn
 
 import kotlin.math.sqrt
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import kotlin.random.Random
+import kotlin.test.*
 
 class VecTests {
     class Vec2(x: Float, y: Float) : Vec<Vec2>(floatArrayOf(x, y)) {
@@ -87,5 +85,51 @@ class VecTests {
             )!!,
             Vec2(5f, 5f)
         )
+
+        assertNull(Vec.centroid(emptyList<Vec2>()), "Should return null centroid for empty list")
+    }
+
+    @Test
+    fun testGroupBy() {
+        val small = Vec2(0f, 0f)
+        val big = Vec2(100f, 100f)
+        val smallGroup = Vec2(10f, 10f)
+        val bigGroup = Vec2(90f, 90f)
+
+        val clusters = Vec.groupBy(
+            listOf(small, big),
+            listOf(smallGroup, bigGroup)
+        )
+
+        assertEquals(clusters.size, 2, "Should result in two clusters")
+        for (cluster in clusters) {
+            if (cluster.center == smallGroup) {
+                assertTrue("Small group should contain small vector") { cluster.members.contains(small) }
+            } else if (cluster.center == bigGroup) {
+                assertTrue("Big group should contain big vector") { cluster.members.contains(big) }
+            } else {
+                assertTrue("There should not be any other clusters") { false }
+            }
+        }
+    }
+
+    @Test
+    fun testRecomputeCenter() {
+        val out = Vec.recomputeCenter(Cluster(Vec2(0f, 0f), listOf(Vec2(-10f, -5f), Vec2(6f, 6f), Vec2(20f, 10f))))
+        assertEquals(out.center, Vec2(6f, 6f), "Cluster center should be correctly selected")
+    }
+
+    @Test
+    fun testKMeans() {
+        val r = Random(10)
+        val maxVec = Vec2(10f, 10f)
+        val vecs = List(100) { Vec2(r.nextFloat() * maxVec.x, r.nextFloat() * maxVec.y) }
+        val k = 10
+        val clusters = Vec.kMeans(k, maxVec, vecs, r)
+
+        assertEquals(k, clusters.size, "Number of clusters should equate to k where k > n")
+        for (cluster in clusters) {
+            assertTrue("Cluster centers should be members of the original set of vectors") { vecs.contains(cluster.center) }
+        }
     }
 }
