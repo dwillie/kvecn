@@ -4,9 +4,9 @@
     <facet type="kotlin-language" name="Kotlin">
       <configuration version="3" platform="JavaScript " useProjectSettings="false" isTestModule="true" externalProjectId="kvecn">
         <sourceSets>
-          <sourceSet>com.example.kvecn.commonTest</sourceSet>
-          <sourceSet>com.example.kvecn.jsMain</sourceSet>
           <sourceSet>com.example.kvecn.commonMain</sourceSet>
+          <sourceSet>com.example.kvecn.jsMain</sourceSet>
+          <sourceSet>com.example.kvecn.commonTest</sourceSet>
         </sourceSets>
         <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
         <compilerSettings />
