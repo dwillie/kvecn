@@ -27,6 +27,12 @@ abstract class Vec<V : Vec<V>>(val values: FloatArray) {
         if (other == null) return false
         if (other !is Vec<*>) return false
 
+        if (true) {
+
+        } else if (false) {
+
+        }
+
         return values.zip(other.values).none { pair -> pair.first != pair.second }
     }
 

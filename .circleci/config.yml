@@ -40,3 +40,6 @@ jobs:
         
       # run tests!
       - run: gradle check
+
+      # run sonarlint
+      - run: gradle sonarqube -Dsonar.projectKey=dwillie_kvecn -Dsonar.organization=dwillie-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_CLOUD_TOKEN
